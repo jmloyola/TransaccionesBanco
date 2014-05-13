@@ -9,11 +9,11 @@ public class Server implements InterfazServer {
       
     public Server() throws java.rmi.RemoteException{
 		cuentas = new Cuenta[5];
-		cuentas[0] = new Cuenta(1,500);
-		cuentas[1] = new Cuenta(2,100);
-		cuentas[2] = new Cuenta(3,250);
+		cuentas[0] = new Cuenta(1,200);
+		cuentas[1] = new Cuenta(2,50);
+		cuentas[2] = new Cuenta(3,150);
 		cuentas[3] = new Cuenta(4,300);
-		cuentas[4] = new Cuenta(5,300);
+		cuentas[4] = new Cuenta(5,175);
 	}
 	
 	private Cuenta buscarCuenta(int identificadorCuenta){
@@ -40,9 +40,11 @@ public class Server implements InterfazServer {
 		int posicionCuenta = darPosicionCuenta(identificadorCuenta);
 		
 		if (posicionCuenta != -1){
-			int saldoCuenta = cuentas[posicionCuenta].getSaldoCuenta();
+			// Modificado para poder ver los problemas con los solapamientos de transacciones.
+			/*int saldoCuenta = cuentas[posicionCuenta].getSaldoCuenta();
 			saldoCuenta += montoDepositar;
-			cuentas[posicionCuenta].setSaldoCuenta(saldoCuenta);
+			cuentas[posicionCuenta].setSaldoCuenta(saldoCuenta);*/
+			cuentas[posicionCuenta].setSaldoCuenta(montoDepositar);
 		}
 		else{
 			System.out.println("ERROR");
@@ -78,8 +80,17 @@ public class Server implements InterfazServer {
 		else{
 			System.out.println("ERROR");
 			System.out.println();
+			return -1;
 		}
     }
+	
+	public int saldoTotal(){
+		int total = 0;
+		for (int i=0; i<cuentas.length; i++){
+			total += cuentas[i].getSaldoCuenta();
+		}
+		return total;
+	}
 	
     public static void main(String args[]) {
 

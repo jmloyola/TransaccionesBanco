@@ -1,15 +1,15 @@
 import java.rmi.RemoteException;
 import java.io.Serializable;
 
-public interface InterfazArticuloVenta extends Serializable {
+public interface InterfazCuenta extends Serializable {
     
     public void imprimir();		
 	
 	public int getIdentificadorCuenta();
 	
-	public void setIdentificadorCuenta();
+	public void setIdentificadorCuenta(int identificadorCuenta);
 	
 	public int getSaldoCuenta();
 	
-	public void setSaldoCuenta();
+	public void setSaldoCuenta(int saldoCuenta);
 }
